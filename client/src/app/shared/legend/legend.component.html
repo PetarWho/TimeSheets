@@ -1,0 +1,9 @@
+<div
+  class="legend"
+  *ngFor="let legend of legends"
+  (click)="onLegendClick(legend.id)"
+  [class.selected]="isSelected(legend.id)"
+>
+  <span [style.background]="legend.color" class="legend-color-box"></span>
+  <span class="legend-text">{{ legend.name }}</span>
+</div>

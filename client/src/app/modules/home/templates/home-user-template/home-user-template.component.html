@@ -1,0 +1,49 @@
+<div @slideInFromBottom class="home-container home-page-container">
+  <div class="home-inner">
+    <div class="left-side-home">
+      <div class="calendar-container">
+        <app-calendar></app-calendar>
+      </div>
+      <div class="btns-container">
+        <app-button
+          type="submit"
+          [btnName]="'Add Work Segments'"
+          [btnClass]="'btn btn-black'"
+        ></app-button>
+        <app-button
+          type="submit"
+          [btnName]="'Add Leave Segments'"
+          [btnClass]="'btn btn-black'"
+        ></app-button>
+      </div>
+    </div>
+    <div class="right-side-home">
+      <div class="right-header">
+        <div class="right-top-left">
+          <p>{{ currentDate }}</p>
+        </div>
+        <div class="right-top-right">
+          <select (change)="onSegmentTypeChange($event)">
+            <option value="WorkSegment">Work Segment</option>
+            <option value="LeaveSegment">Leave Segment</option>
+          </select>
+        </div>
+      </div>
+      <div class="right-main">
+        <app-table
+          *ngIf="isWorkSegmentSelected"
+          class="segment-table"
+          [columns]="workSegmentColumns"
+          [data]="workSegmentData"
+        ></app-table>
+
+        <app-table
+          *ngIf="!isWorkSegmentSelected"
+          class="segment-table"
+          [columns]="leaveSegmentColumns"
+          [data]="leaveSegmentData"
+        ></app-table>
+      </div>
+    </div>
+  </div>
+</div>

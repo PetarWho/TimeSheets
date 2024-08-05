@@ -1,0 +1,43 @@
+.app-paginator {
+  font-size: 0.9rem;
+  border-radius: 0px 0px 10px 10px;
+}
+::ng-deep .mat-mdc-paginator {
+  width: 100% !important;
+}
+::ng-deep .mat-mdc-paginator-outer-container {
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+::ng-deep .app-paginator .mat-mdc-select-min-line {
+  font-size: 0.8rem;
+}
+::ng-deep .mat-mdc-form-field {
+  padding-top: 2.6rem !important;
+}
+::ng-deep .mat-mdc-paginator-container * {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+::ng-deep .mat-mdc-paginator-container {
+  height: 80px;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+::ng-deep .mdc-text-field--no-label {
+  margin-bottom: 20px !important;
+}
+::ng-deep .mat-mdc-paginator-page-size {
+  height: 100% !important;
+}
+::ng-deep.mat-mdc-tooltip-trigger:hover {
+  background-color: var(--light-primary);
+  transition: 0.7s ease all;
+  -moz-transition: 0.7s ease all;
+  -webkit-transition: 0.7s ease all;
+}

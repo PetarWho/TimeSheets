@@ -1,0 +1,129 @@
+.manager-top-cards {
+  display: flex;
+  gap: 10px;
+  justify-content: space-evenly;
+  margin: 1vh 2vw 1vh 2vw;
+  & p {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: white;
+  }
+}
+
+.manager-top-cards > * {
+  border-radius: 15px;
+  justify-content: center;
+  text-align: center;
+  width: 19vw;
+}
+
+.work-segments-card {
+  background-color: hsl(126, 62%, 31%);
+  padding: 0 15px 10px 15px;
+}
+.work-segments-card:hover img {
+  transition: all 0.65s;
+  transform: rotateY(360deg);
+}
+.count {
+  margin: 5px;
+}
+.leave-segments-card {
+  background-color: #ff6633;
+  padding: 0 15px 10px 15px;
+}
+.leave-segments-card:hover img {
+  transition: all 0.65s;
+  transform: rotateY(360deg);
+}
+
+.teams-card {
+  background-color: #57bdb1;
+  padding: 0 15px 10px 15px;
+}
+.teams-card:hover img {
+  transition: all 0.65s;
+  transform: rotateY(360deg);
+}
+
+.projects-card {
+  background-color: #d25a61;
+  padding: 0 15px 10px 15px;
+}
+.projects-card:hover img {
+  transition: all 0.65s;
+  transform: rotateY(360deg);
+}
+.work-segments-card:hover,
+.projects-card:hover,
+.teams-card:hover,
+.leave-segments-card:hover {
+  transform: scale(1.07);
+  transition: 0.7s ease all;
+  -moz-transition: 0.7s ease all;
+  -webkit-transition: 0.7s ease all;
+  box-shadow:
+    0 26px 58px 0 rgba(0, 0, 0, 0.22),
+    0 5px 14px 0 rgba(0, 0, 0, 0.18);
+}
+
+.manager-content {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  padding: 0 4.7vw;
+  gap: 10vw;
+}
+.home-calendar {
+  flex: 1;
+}
+
+.stats-card {
+  padding-bottom: 20px;
+  justify-content: end;
+  font-size: 1.2rem;
+}
+
+.stats-header {
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.stats-container {
+  width: fit-content;
+  background-color: transparent;
+  flex: 3;
+}
+
+::ng-deep .ngx-charts .gridline-path {
+  stroke: transparent !important;
+}
+::ng-deep .ngx-charts {
+  text {
+    fill: #000000 !important;
+  }
+}
+
+::ng-deep .stats-card .legend-label,
+::ng-deep .stats-card .chart-legend {
+  color: black !important;
+}
+
+::ng-deep .stats-card .chart-legend :hover {
+  color: rgb(58, 58, 58) !important;
+}
+
+::ng-deep .stats-card .legend-labels {
+  width: fit-content !important;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+::ng-deep .stats-card .legend-label-text,
+::ng-deep.stats-card .legend-title-text {
+  font-size: 1rem !important;
+}
+
+::ng-deep .stats-card .ng-star-inserted {
+  font-size: 0.85rem !important;
+}

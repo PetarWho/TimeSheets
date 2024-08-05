@@ -1,0 +1,44 @@
+{
+  "dev": {
+    "driver": "mysql",
+    "user": "root",
+    "password": "",
+    "host": "localhost",
+    "port": "3306",
+    "database": "time_sheets",
+    "multipleStatements": true
+  },
+
+  "test": {
+    "driver": "sqlite3",
+    "filename": ":memory:"
+  },
+
+  "prod": {
+    "driver": "mysql",
+    "user": "root",
+    "password": "",
+    "host": "localhost",
+    "port": "3306",
+    "database": "time_sheets"
+  },
+
+  "pg": {
+    "driver": "pg",
+    "user": "test",
+    "password": "test",
+    "host": "localhost",
+    "database": "mydb",
+    "port": "20144",
+    "ssl": "true",
+    "schema": "my_schema"
+  },
+
+  "mongo": {
+    "driver": "mongodb",
+    "database": "my_db",
+    "host": "localhost"
+  },
+
+  "other": "postgres://uname:pw@server.com/dbname"
+}

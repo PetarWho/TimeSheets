@@ -1,0 +1,26 @@
+<div class="dialog-wrapper">
+  <h2 class="dialog-title" mat-dialog-title>
+    {{ data.dialogTitle }}
+    <button mat-icon-button class="close-button" (click)="dialogRef.close()">
+      <span>X</span>
+    </button>
+  </h2>
+  <mat-dialog-content class="dialog-content">
+    <ng-container *ngTemplateOutlet="data.contentTemplate"></ng-container>
+  </mat-dialog-content>
+  <mat-dialog-actions class="dialog-actions">
+    <ng-container
+      class="dialog-actions-container"
+      *ngFor="let button of data.buttons"
+    >
+      <button
+        class="btn"
+        mat-button
+        (click)="handleButtonClick(button)"
+        [ngClass]="button.class"
+      >
+        {{ button.label }}
+      </button>
+    </ng-container>
+  </mat-dialog-actions>
+</div>

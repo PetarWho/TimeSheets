@@ -1,0 +1,16 @@
+<article class="calendar-wrapper">
+  <igx-calendar
+    selection="range"
+    (selected)="handleSelectionChange($event)"
+  ></igx-calendar>
+
+  <div *ngIf="selectedDates">
+    <p class="selected-range">
+      {{ selectedDates.startDate | date }} -
+      {{ selectedDates.endDate | date }}
+    </p>
+  </div>
+  <div *ngIf="!selectedDates">
+    <p class="selected-range">No dates selected.</p>
+  </div>
+</article>

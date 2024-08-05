@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+:root {
+  --background-color: #fbf7f3;
+  --primary-color: #007bff;
+  --light-primary: #95c4f7df;
+  --lighter-primary: #cee2f8b8;
+  --secondary-color: #4d535a;
+  --accent-color: #fd7e14;
+  --text-color: #1e1409;
+  --popup-gray: #e1e1e1;
+  --light-gray: #999999;
+  --lighter-gray: #efeded70;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+
+.dialog-actions .btn {
+  color: rgb(0, 0, 0);
+  padding: 20px;
+  width: 7rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.dialog-actions .btn-save {
+  background-color: rgb(24, 177, 24) !important;
+  width: auto;
+}
+.dialog-actions .btn {
+  color: rgb(255, 255, 255) !important;
+  font-size: 1.2rem !important;
+}
+.dialog-actions .btn-delete {
+  background-color: rgb(223, 22, 22) !important;
+  width: auto;
+}
+.dialog-actions .btn-deactivate {
+  background-color: rgb(0, 0, 0) !important;
+  width: auto;
+}
+.btn:hover {
+  background-color: #0056b3;
+}
+
+.add-segment-dialog-btn button {
+  background-color: #007bff !important;
+  color: white !important;
+  font-size: 1.1rem;
+  padding: 23px 15px;
+}

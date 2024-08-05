@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+<div @slideInFromBottom class="teams-container">
+  <div class="teams-inner-container">
+    <div class="teams-top">
+      <h1>Teams</h1>
+    </div>
+    <div class="search-bar-container">
+      <app-searchbar
+        placeholder="Search for team..."
+        (searchTextChange)="onSearchTextChange($event)"
+      ></app-searchbar>
+    </div>
+    <div>
+      <div class="table-container">
+        <app-table
+          [columns]="columns"
+          [data]="data"
+          (rowClick)="onTeamClick($event)"
+        ></app-table>
+      </div>
+      <app-paginator
+        [pageSize]="pageSize"
+        [itemsCount]="teamsCount"
+        (pageChange)="onPageChange($event)"
+      ></app-paginator>
+      <app-dialog
+        class="team-dialog"
+        [buttonConfigs]="getTeamButtons()"
+        [enterAnimationDuration]="'300ms'"
+        [exitAnimationDuration]="'150ms'"
+        [contentTemplate]="teamTemplate"
+        dialogTitle="Edit Team"
+        [showButton]="false"
+        width="40%"
+        height="50%"
+      ></app-dialog>
+      <ng-template #teamTemplate>
+        <div class="info-container">
+          <div class="name-container">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="updatedTeam!.name"
+            />
+          </div>
+          <div class="member-container">
+            <label for="members">Members:</label>
+            <ul>
+              <li *ngFor="let member of members">
+                {{ member.user.name }}
+                <button (click)="removeMember(member.membershipId)">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </li>
+            </ul>
+          </div>
+          <app-autocomplete-filter
+            class="form-group half-width autocomplete-box"
+            [label]="'User'"
+            [options]="usersAutocompleteNames"
+            [displayFn]="displayOption"
+            (optionSelected)="onUserSelected($event)"
+            (inputChanged)="onUserInputChanged($event)"
+          ></app-autocomplete-filter>
+
+          <p>
+            <strong>Created at:</strong>
+            {{ updatedTeam!.created_at | date }}
+          </p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

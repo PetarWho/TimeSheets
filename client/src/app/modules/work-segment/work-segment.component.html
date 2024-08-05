@@ -1,0 +1,196 @@
+<app-navbar></app-navbar>
+<div class="work-segment-container">
+  <div class="work-segment-inner">
+    <div @slideInFromLeft class="left-side-work-segment">
+      <div class="calendar-container">
+        <app-calendar
+          (dateRangeSelected)="handleDateRangeChange($event)"
+        ></app-calendar>
+      </div>
+      <div class="legend-container">
+        <app-legend
+          class="legends-array"
+          [legends]="legendsArray"
+          (legendClicked)="handleLegendClick($event)"
+        ></app-legend>
+      </div>
+    </div>
+    <div @slideInFromRight class="right-side-work-segment">
+      <div class="right-side-header">
+        <h2>{{ isAdminOrManager ? "All" : "My" }} Work Segments</h2>
+        <app-dialog
+          class="add-segment-dialog-btn"
+          [buttonConfigs]="getAddSegmentButtons()"
+          [contentTemplate]="addWorkSegmentTemplate"
+          dialogTitle="Create Leave Segment"
+          width="40%"
+          height="fit-content"
+          [buttonText]="'Add New'"
+          [showButton]="true"
+        ></app-dialog>
+      </div>
+      <div *ngIf="isLoading" class="loading-indicator">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+      <div class="right-side-main">
+        <app-table
+          class="work-segment-table"
+          [columns]="columns"
+          [data]="data"
+          (rowClick)="onWorkSegmentClick($event)"
+        ></app-table>
+        <app-paginator
+          class="paginator"
+          [itemsCount]="workSegmentsCount"
+          [totalItems]="totalWorkSegments"
+          [pageSize]="pageSize"
+          (pageChange)="onPageChange($event)"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-dialog
+  #workSegmentDialog
+  class="work-segment-dialog"
+  [buttonConfigs]="getWorkSegmentButtons()"
+  [contentTemplate]="workSegmentTemplate"
+  dialogTitle="Edit Work Segment"
+  width="40%"
+  height="fit-content"
+  [showButton]="false"
+></app-dialog>
+
+<ng-template #workSegmentTemplate>
+  <div class="info-container" *ngIf="selectedWorkSegment">
+    <div class="row">
+      <div class="form-group half-width">
+        <label for="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          class="form-control"
+          [ngModel]="selectedWorkSegment.date | date: 'yyyy-MM-dd'"
+          (ngModelChange)="updateDate($event)"
+        />
+      </div>
+      <div class="form-group half-width">
+        <label for="hours">Hours</label>
+        <input
+          type="number"
+          id="hours"
+          name="hours"
+          class="form-control"
+          [ngModel]="selectedWorkSegment.hours"
+          (ngModelChange)="updateHours($event)"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <textarea
+        id="notes"
+        name="notes"
+        class="form-control"
+        rows="3"
+        [(ngModel)]="selectedWorkSegment.notes"
+      ></textarea>
+    </div>
+    <div class="row">
+      <app-autocomplete-filter
+        class="form-group autocomplete-box"
+        [label]="'Type'"
+        [options]="typesNamesAutocomplete"
+        [displayFn]="displayOption"
+        (optionSelected)="onTypeSelected($event)"
+        [selectedOption]="selectedTypeOption"
+        (inputChanged)="onTypeInputChanged($event)"
+      ></app-autocomplete-filter>
+      <app-autocomplete-filter
+        *ngIf="isAdminOrManager"
+        class="form-group autocomplete-box"
+        [label]="'User'"
+        [options]="usersNamesAutocomplete"
+        [displayFn]="displayOption"
+        (optionSelected)="onUserSelected($event)"
+        [selectedOption]="selectedUserOption"
+        (inputChanged)="onUserInputChanged($event)"
+      ></app-autocomplete-filter>
+      <app-autocomplete-filter
+        class="form-group autocomplete-box"
+        [label]="'Project'"
+        [options]="projectsNamesAutocomplete"
+        [displayFn]="displayOption"
+        (optionSelected)="onProjectSelected($event)"
+        [selectedOption]="selectedProjectOption"
+        (inputChanged)="onProjectInputChanged($event)"
+      ></app-autocomplete-filter>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addWorkSegmentTemplate>
+  <form [formGroup]="workSegmentForm" (ngSubmit)="addWorkSegment()">
+    <div class="info-container">
+      <div class="row">
+        <div class="form-group half-width">
+          <label for="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            formControlName="date"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group half-width">
+          <label for="hours">Hours</label>
+          <input
+            type="number"
+            id="hours"
+            formControlName="hours"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea
+          id="notes"
+          formControlName="notes"
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+      <div class="row">
+        <app-autocomplete-filter
+          class="form-group autocomplete-box"
+          [label]="'Type'"
+          [options]="typesNamesAutocomplete"
+          [displayFn]="displayOption"
+          (optionSelected)="onTypeSelected($event)"
+          (inputChanged)="onTypeInputChanged($event)"
+        ></app-autocomplete-filter>
+        <app-autocomplete-filter
+          *ngIf="isAdminOrManager"
+          class="form-group autocomplete-box"
+          [label]="'User'"
+          [options]="usersNamesAutocomplete"
+          [displayFn]="displayOption"
+          (optionSelected)="onUserSelected($event)"
+          (inputChanged)="onUserInputChanged($event)"
+        ></app-autocomplete-filter>
+        <app-autocomplete-filter
+          class="form-group autocomplete-box"
+          [label]="'Project'"
+          [options]="projectsNamesAutocomplete"
+          [displayFn]="displayOption"
+          (optionSelected)="onProjectSelected($event)"
+          (inputChanged)="onProjectInputChanged($event)"
+        ></app-autocomplete-filter>
+      </div>
+    </div>
+  </form>
+</ng-template>

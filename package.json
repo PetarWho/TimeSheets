@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "husky": "^9.0.11",
+    "prettier": "^3.3.2"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md,html}\"",
+    "install-server": "cd server && npm install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,css,md,html}": [
+      "prettier --write"
+    ]
+  }
+}

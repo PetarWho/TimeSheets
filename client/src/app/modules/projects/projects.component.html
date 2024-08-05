@@ -1,0 +1,68 @@
+<app-navbar></app-navbar>
+<div @slideInFromBottom class="projects-container">
+  <div class="project-inner-container">
+    <div class="projects-top">
+      <h1>Projects</h1>
+    </div>
+    <div class="search-bar-container">
+      <app-searchbar
+        placeholder="Search for project..."
+        (searchTextChange)="onSearchTextChange($event)"
+      ></app-searchbar>
+    </div>
+    <div class="table-container">
+      <app-table
+        [columns]="columns"
+        [data]="data"
+        (rowClick)="onProjectClick($event)"
+      ></app-table>
+      <app-paginator
+        [pageSize]="pageSize"
+        [itemsCount]="projectsCount"
+        (pageChange)="onPageChange($event)"
+      ></app-paginator>
+    </div>
+    <div *ngIf="selectedProject" class="user-details"></div>
+  </div>
+</div>
+<app-dialog
+  *ngIf="isAdminOrManager"
+  class="project-dialog"
+  [buttonConfigs]="getProjectButtons()"
+  [enterAnimationDuration]="'300ms'"
+  [exitAnimationDuration]="'150ms'"
+  [contentTemplate]="projectTemplate"
+  dialogTitle="Edit Project"
+  [showButton]="false"
+  width="40%"
+  height="46%"
+></app-dialog>
+<ng-template #projectTemplate>
+  <div class="info-container" *ngIf="selectedProject">
+    <div class="name-container">
+      <label for="name">Name</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        [(ngModel)]="selectedProject!.name"
+      />
+    </div>
+
+    <app-autocomplete-filter
+      [label]="'Client'"
+      [options]="clientNames"
+      [displayFn]="displayClient"
+      (optionSelected)="onClientSelected($event)"
+      [selectedOption]="selectedClientOption"
+      (inputChanged)="onInputChanged($event)"
+    ></app-autocomplete-filter>
+
+    <div class="date-container">
+      <p>
+        <strong>Created at:</strong>
+        {{ selectedProject!.created_at | date }}
+      </p>
+    </div>
+  </div>
+</ng-template>

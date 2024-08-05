@@ -1,0 +1,20 @@
+<div class="input-field">
+  <input
+    [type]="type"
+    [name]="name"
+    [placeholder]="placeholder"
+    [(ngModel)]="model"
+    (ngModelChange)="onModelChange($event)"
+    [required]="required"
+  />
+  <span class="bar"></span>
+  <label class="label">
+    <span
+      *ngFor="let char of label.split(''); let i = index"
+      class="label-char"
+      [style.--index]="i"
+    >
+      {{ char }}
+    </span>
+  </label>
+</div>

@@ -1,0 +1,42 @@
+<nav class="nav-main">
+  <a class="nav-logo" routerLink="/home"> TimeSheets </a>
+  <div class="nav-links">
+    <ul class="nav">
+      <li *ngIf="isAdmin">
+        <a routerLink="/employees">Employees</a>
+      </li>
+      <li>
+        <a routerLink="/work-segments">Work Segments</a>
+      </li>
+      <li>
+        <a routerLink="/leave-segments">Leave Segments</a>
+      </li>
+      <li>
+        <a routerLink="/teams">Teams</a>
+      </li>
+      <li>
+        <a routerLink="/projects">Projects</a>
+      </li>
+    </ul>
+  </div>
+  <div class="profile-container" (click)="toggleDropdown()">
+    <img
+      id="avatar"
+      [src]="avatarSrc"
+      width="50px"
+      height="50%"
+      alt="Avatar"
+      referrerpolicy="no-referrer"
+    />
+    <i class="material-icons" [class.rotate180]="isDropdownOpen">
+      arrow_drop_down
+    </i>
+    <div class="dropdown-menu" *ngIf="isDropdownOpen">
+      <ul>
+        <li routerLink="/profile">Profile</li>
+        <!--<li>Settings</li>-->
+        <li id="sign-out-button" (click)="onLogout()">Sign Out</li>
+      </ul>
+    </div>
+  </div>
+</nav>

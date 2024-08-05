@@ -1,0 +1,58 @@
+.home-container {
+  width: 100%;
+  height: 100vh;
+  padding: 2rem;
+}
+.home-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.left-side-home {
+  width: 30rem;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 4rem;
+}
+.calendar-container {
+  width: 100%;
+  height: 20rem;
+}
+.btns-container {
+  width: 100%;
+  height: 6rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: start;
+  flex-direction: column;
+}
+.right-side-home {
+  width: 56rem;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.right-header {
+  padding: 2rem;
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.right-main {
+  padding: 2rem;
+  width: 100%;
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #999999;
+}

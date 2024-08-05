@@ -1,0 +1,85 @@
+<div @slideInFromBottom class="manager-container home-container">
+  <div class="manager-top-cards">
+    <div class="work-segments-card">
+      <div>
+        <p>Work Segements</p>
+      </div>
+      <img [src]="workIconPath" width="50" alt="work" />
+      <p class="count">{{ statisticsCardData.workSegmentsCount }}</p>
+      <app-button
+        type="submit"
+        [btnName]="'View all'"
+        [btnClass]="'btn btn-white'"
+        (buttonClick)="navigateTo('/work-segments')"
+      ></app-button>
+    </div>
+    <div class="leave-segments-card">
+      <div>
+        <p>Leave Segements</p>
+        <img [src]="leaveIconPath" width="50" alt="leave" />
+      </div>
+      <p class="count">{{ statisticsCardData.leaveSegmentsCount }}</p>
+      <app-button
+        type="submit"
+        [btnName]="'View all'"
+        [btnClass]="'btn btn-white'"
+        (buttonClick)="navigateTo('/leave-segments')"
+      ></app-button>
+    </div>
+    <div class="teams-card">
+      <div>
+        <p>Teams</p>
+        <img [src]="teamsIconPath" width="70" alt="teams" />
+      </div>
+      <p class="count">{{ statisticsCardData.teamsCount }}</p>
+      <app-button
+        type="submit"
+        [btnName]="'View all'"
+        [btnClass]="'btn btn-white'"
+        (buttonClick)="navigateTo('/teams')"
+      ></app-button>
+    </div>
+    <div class="projects-card">
+      <div>
+        <p>Projects</p>
+        <img [src]="projectIconPath" width="50" alt="project" />
+      </div>
+      <p class="count">{{ statisticsCardData.projectsCount }}</p>
+      <app-button
+        type="submit"
+        [btnName]="'View all'"
+        [btnClass]="'btn btn-white'"
+        (buttonClick)="navigateTo('/projects')"
+      ></app-button>
+    </div>
+  </div>
+  <div class="manager-content">
+    <app-calendar
+      class="home-calendar"
+      (dateRangeSelected)="handleDateRangeChange($event)"
+    ></app-calendar>
+    <mat-card class="stats-container">
+      <mat-card-header class="stats-header">
+        Statistics Overview
+      </mat-card-header>
+      <mat-card-content>
+        <ngx-charts-bar-vertical
+          class="stats-card"
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="statisticsData"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel"
+          (select)="onSelect($event)"
+        >
+        </ngx-charts-bar-vertical>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npm run format
+
+#for formatting to work as expected, each user needs to set this file as an executable
+#chmod +x .husky/pre-commit

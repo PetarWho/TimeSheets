@@ -1,0 +1,16 @@
+.btn {
+  margin-right: 8px;
+}
+
+.dialog-wrapper {
+  width: fit-content;
+}
+
+::ng-deep.close-button {
+  position: absolute !important;
+  right: 20px !important;
+  top: -10px !important;
+  & span {
+    font-size: 24px;
+  }
+}

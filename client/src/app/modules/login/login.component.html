@@ -1,0 +1,56 @@
+<div @fadeInOut class="main-login-container">
+  <div class="inner-login-container">
+    <div class="left-side-login">
+      <div>
+        <img [src]="signUpImg" alt="wave" />
+        <p>
+          "TimeSheets is designed to help users track and manage their time
+          efficiently. It provides a lot of features. The goal is to enhance
+          productivity by providing a clear overview of how time is spent."
+        </p>
+      </div>
+    </div>
+    <div class="wave-container">
+      <img [src]="wave" class="wave" alt="wave" />
+    </div>
+    <div class="right-side-login">
+      <div class="login-avatar">
+        <img [src]="avatarSrc" width="100" alt="Avatar" />
+      </div>
+      <div class="login-title">
+        <h1>Login</h1>
+      </div>
+      <p>Login in your account</p>
+      <form class="login-field" (ngSubmit)="onSubmit()">
+        <app-input-field
+          [type]="email"
+          name="email"
+          label="Email..."
+          [(model)]="email"
+          [required]="true"
+        ></app-input-field>
+        <app-input-field
+          type="password"
+          name="password"
+          label="Password..."
+          [(model)]="password"
+          [required]="true"
+        ></app-input-field>
+        <div class="login-buttons">
+          <app-button
+            type="submit"
+            [btnName]="'Login'"
+            [btnClass]="'btn-sign-in'"
+          ></app-button>
+        </div>
+      </form>
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <p class="paragraph">
+        Don't have an account yet?
+        <a routerLink="/sign-up">Create one now</a>
+      </p>
+      <div id="googleBtn"></div>
+    </div>
+  </div>
+  <div></div>
+</div>

@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+
+<ng-container *ngIf="isAdminOrManagerView; else userTemplate">
+  <ng-container *ngTemplateOutlet="managerAdminTemplate"></ng-container>
+</ng-container>
+
+<ng-template #userTemplate
+  ><app-home-user-template></app-home-user-template>
+</ng-template>
+
+<ng-template #managerAdminTemplate>
+  <app-home-admin-template></app-home-admin-template>
+</ng-template>

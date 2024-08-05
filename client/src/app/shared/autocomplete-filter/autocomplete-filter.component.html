@@ -1,0 +1,25 @@
+<form class="autocomplete-filter-form">
+  <mat-form-field class="full-width">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      type="text"
+      placeholder="Pick one"
+      aria-label="Number"
+      matInput
+      [formControl]="formControl"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      [displayWith]="displayFn"
+      (optionSelected)="onOptionSelected($event)"
+    >
+      <mat-option
+        *ngFor="let option of filteredOptions | async"
+        [value]="option"
+      >
+        {{ displayFn(option) }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+<div class="employee-container">
+  <h1>Employees:</h1>
+  <div class="employee-inner">
+    <div @slideInFromLeft class="employee-left">
+      <div class="filters-container">
+        <input
+          [(ngModel)]="searchText"
+          class="employee-search"
+          placeholder="Search employees..."
+          (input)="loadData()"
+        />
+        <select
+          [(ngModel)]="statusFilter"
+          class="employee-filter"
+          (change)="loadData()"
+        >
+          <option [value]="UserStatus.All">All</option>
+          <option [value]="UserStatus.Active">Active</option>
+          <option [value]="UserStatus.Deactivated">Deactivated</option>
+        </select>
+      </div>
+      <div class="table-container">
+        <app-table
+          [columns]="columns"
+          [data]="users"
+          [selectedRow]="selectedUser"
+          (rowClick)="onUserClick($event)"
+        ></app-table>
+      </div>
+      <app-paginator
+        [totalItems]="totalUsers"
+        [pageSize]="pageSize"
+        [itemsCount]="usersCount"
+        (pageChange)="onPageChange($event)"
+        [pageSize]="pageSize"
+      ></app-paginator>
+    </div>
+    <div @slideInFromRight class="employee-right">
+      <div *ngIf="selectedUser" class="user-details">
+        <h2>User Information</h2>
+        <p><strong>Name:</strong> {{ selectedUser.name }}</p>
+        <p><strong>Email:</strong> {{ selectedUser.email }}</p>
+        <p>
+          <strong>Status:</strong>
+          {{ selectedUser.deactivated ? "Deactivated" : "Activated" }}
+        </p>
+        <p><strong>Created At:</strong> {{ selectedUser.created_at | date }}</p>
+        <app-dialog
+          class="employee-dialog"
+          [buttonConfigs]="getEmployeeButtons()"
+          [enterAnimationDuration]="'300ms'"
+          [exitAnimationDuration]="'150ms'"
+          [contentTemplate]="employeeTemplate"
+          dialogTitle="Edit Employee"
+          buttonText="View Options"
+          width="50%"
+          height="50%"
+        ></app-dialog>
+        <ng-template #employeeTemplate>
+          <div class="info-container" *ngIf="updatedUser">
+            <div class="name-container">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                [(ngModel)]="updatedUser!.name"
+              />
+            </div>
+            <div class="role-container">
+              <label for="role">Role</label>
+              <select
+                name="role"
+                id="role_id"
+                [(ngModel)]="selectedUser.role_id"
+              >
+                <option *ngFor="let role of roles" [value]="role.id">
+                  {{ role.name }}
+                </option>
+              </select>
+            </div>
+
+            <div class="email-container">
+              <label for="email">Email</label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                [(ngModel)]="updatedUser!.email"
+              />
+            </div>
+            <div class="team-container"></div>
+            <div class="date-container">
+              <p>
+                <strong>Member since:</strong>
+                {{ selectedUser.created_at | date }}
+              </p>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

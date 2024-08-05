@@ -1,0 +1,58 @@
+<div @fadeInOut class="main-signup-container">
+  <div class="inner-signup-container">
+    <div class="left-side-signup">
+      <div>
+        <img [src]="signUpImg" alt="wave" />
+        <p>
+          TimeSheets is designed to help users track and manage their time
+          efficiently. It provides a lot of features. The goal is to enhance
+          productivity by providing a clear overview of how time is spent.
+        </p>
+      </div>
+    </div>
+    <div class="wave-container">
+      <img [src]="wave" class="wave" alt="wave" />
+    </div>
+    <div class="right-side-signup">
+      <div class="signup-avatar">
+        <img [src]="avatarSrc" width="100" alt="Avatar" />
+      </div>
+      <div class="signup-title">
+        <h1>Sign Up</h1>
+      </div>
+      <p>Create your account</p>
+      <form class="signup-field" (ngSubmit)="onSubmit()">
+        <app-input-field
+          [type]="email"
+          name="email"
+          label="Email..."
+          [(model)]="email"
+        ></app-input-field>
+        <app-input-field
+          [type]="text"
+          name="name"
+          label="Username..."
+          [(model)]="name"
+        ></app-input-field>
+        <app-input-field
+          type="password"
+          name="password"
+          label="Password..."
+          [(model)]="password"
+        ></app-input-field>
+        <div class="sign-up-buttons">
+          <app-button
+            type="submit"
+            [btnName]="'Sign Up'"
+            [btnClass]="'btn-sign-in'"
+          ></app-button>
+        </div>
+      </form>
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+      <div class="paragraph">
+        <p>Already have an account? <a routerLink="/login">Log in</a></p>
+        <div id="googleBtn"></div>
+      </div>
+    </div>
+  </div>
+</div>

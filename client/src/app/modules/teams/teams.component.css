@@ -1,0 +1,110 @@
+.teams-container {
+  width: 100%;
+  height: auto;
+  padding: 0rem 10rem;
+}
+.teams-inner-container {
+  width: 100%;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+.teams-top {
+  width: 100%;
+  & h1 {
+    text-align: center;
+    margin: 0;
+  }
+}
+.search-bar-container {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  & input {
+    padding: 1rem 8rem;
+  }
+  & input::placeholder {
+    font-size: 1.2rem;
+    text-align: left;
+  }
+}
+
+.info-container {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(1fr);
+}
+.name-container {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 10px;
+  grid-column: 1/2;
+  & label {
+    font-size: 1.4rem;
+  }
+  input {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+}
+
+.member-container {
+  grid-column: 2/3;
+  & label {
+    font-size: 1.4rem;
+  }
+  & ul {
+    line-height: 35px;
+    margin-top: 10px;
+  }
+  & button {
+    background-color: red;
+    padding: 6px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: unset;
+    outline: none;
+  }
+  & button:hover {
+    transform: scale(1.1);
+    transition: 0.7s ease all;
+    -moz-transition: 0.7s ease all;
+    -webkit-transition: 0.7s ease all;
+  }
+  & i {
+    color: white;
+  }
+}
+
+.autocomplete-box {
+  grid-column: 1/2;
+  grid-row: 2;
+  width: 70%;
+}
+::ng-deep .dialog-actions {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+::ng-deep .snackbar-success {
+  --mdc-snackbar-container-color: rgba(0, 0, 0, 0.886);
+  --mat-snack-bar-button-color: white;
+  --mdc-snackbar-supporting-text-color: green;
+  --mdc-snackbar-supporting-text-font-size: 30px;
+}
+
+::ng-deep .snackbar-error {
+  --mdc-snackbar-container-color: rgba(0, 0, 0, 0.886);
+  --mat-snack-bar-button-color: white;
+  --mdc-snackbar-supporting-text-color: red;
+  --mdc-snackbar-supporting-text-font-size: 30px;
+}

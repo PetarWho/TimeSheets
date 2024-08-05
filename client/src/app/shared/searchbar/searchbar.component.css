@@ -1,0 +1,8 @@
+.employee-search {
+  padding: 1rem 2.7rem;
+  border-radius: 0.6rem;
+  border: 2px solid #999999;
+}
+.employee-search::placeholder {
+  font-size: 1rem;
+}

@@ -1,0 +1,94 @@
+<app-navbar class="profile-navbar"></app-navbar>
+<div @slideInFromBottom class="profile-page">
+  <h1>Edit profile</h1>
+  <div class="profile">
+    <div class="profile-img">
+      <img [src]="avatarSrc" alt="Avatar" referrerpolicy="no-referrer" />
+    </div>
+    <div>
+      <div class="user-container" *ngIf="!editMode; else editModeTemplate">
+        <div id="user-name">
+          <label for="name">Name:</label>
+          <span id="name">{{ user?.name }}</span>
+        </div>
+        <div id="user-email">
+          <label for="email">Email:</label>
+          <span id="email">{{ user?.email }}</span>
+        </div>
+        <div *ngIf="userIsAdmin">
+          <app-button
+            (click)="toggleEditMode()"
+            [btnName]="'Edit'"
+            [btnClass]="'btn btn-white profile-btn'"
+          ></app-button>
+        </div>
+      </div>
+
+      <ng-template #editModeTemplate>
+        <form
+          [formGroup]="profileForm"
+          class="profile-edit-form"
+          (ngSubmit)="onSubmit()"
+        >
+          <div class="form-group``">
+            <label for="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              class="input-name"
+              formControlName="name"
+              placeholder="Name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <ng-container
+              *ngIf="
+                user?.email_verified_at !== null &&
+                  user?.email_verified_at !== undefined;
+                else editableEmail
+              "
+            >
+              <span id="email">{{ user?.email }}</span>
+            </ng-container>
+            <ng-template #editableEmail>
+              <input type="email" id="email" formControlName="email" required />
+            </ng-template>
+          </div>
+          <div class="profile-edit-btns">
+            <app-button
+              type="submit"
+              [btnName]="'Save Changes'"
+              [btnClass]="'btn btn-white'"
+            ></app-button>
+            <app-button
+              (click)="toggleEditMode()"
+              [btnName]="'Cancel'"
+              [btnClass]="'btn btn-white'"
+            ></app-button>
+          </div>
+        </form>
+      </ng-template>
+
+      <div id="user-info">
+        <p id="user-role">
+          Role:
+          {{ user?.role }}
+        </p>
+        <div id="user-dates">
+          <p>User since: {{ user?.created_at | date: "dd/MM/yyyy" }}</p>
+          <p>Last user update: {{ user?.updated_at | date: "dd/MM/yyyy" }}</p>
+        </div>
+        <div id="email-verification">
+          <p>
+            {{
+              user?.google_id ? "Linked with Google" : "Not linked with Google"
+            }}
+          </p>
+          <div id="googleBtn"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

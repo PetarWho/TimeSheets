@@ -1,0 +1,180 @@
+<app-navbar></app-navbar>
+<div class="leave-segment-container">
+  <div class="leave-segment-inner">
+    <div @slideInFromLeft class="left-side-leave-segment">
+      <div class="calendar-container">
+        <app-calendar
+          (dateRangeSelected)="handleDateRangeChange($event)"
+        ></app-calendar>
+      </div>
+      <div class="legend-container">
+        <app-legend
+          class="legends-array"
+          [legends]="legendsArray"
+          (legendClicked)="handleLegendClick($event)"
+        ></app-legend>
+      </div>
+    </div>
+    <div @slideInFromRight class="right-side-leave-segment">
+      <div class="right-side-header">
+        <h2>{{ isAdminOrManager ? "All" : "My" }} Leave Segments</h2>
+        <app-dialog
+          class="add-segment-dialog-btn"
+          [buttonConfigs]="getAddSegmentButtons()"
+          [contentTemplate]="addSegmentTemplate"
+          dialogTitle="Create Leave Segment"
+          width="40%"
+          height="fit-content"
+          [buttonText]="'Add New'"
+          [showButton]="true"
+        ></app-dialog>
+      </div>
+      <div *ngIf="isLoading" class="loading-indicator">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+      </div>
+      <div class="right-side-main">
+        <app-table
+          class="leave-segment-table"
+          [columns]="columns"
+          [data]="data"
+          (rowClick)="onLeaveSegmentClick($event)"
+        ></app-table>
+        <app-paginator
+          class="paginator"
+          [itemsCount]="leaveSegmentsCount"
+          [totalItems]="totalLeaveSegments"
+          [pageSize]="pageSize"
+          (pageChange)="onPageChange($event)"
+        ></app-paginator>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-dialog
+  #leaveSegmentDialog
+  class="leave-segment-dialog"
+  [buttonConfigs]="getLeaveSegmentButtons()"
+  [contentTemplate]="leaveSegmentTemplate"
+  dialogTitle="Edit Leave Segment"
+  width="40%"
+  height="fit-content"
+  [showButton]="false"
+></app-dialog>
+
+<ng-template #leaveSegmentTemplate>
+  <div class="info-container" *ngIf="selectedLeaveSegment">
+    <div class="row">
+      <div class="form-group half-width">
+        <label for="start-date">Start Date</label>
+        <input
+          type="date"
+          id="start-date"
+          name="start-date"
+          class="form-control"
+          [ngModel]="selectedLeaveSegment.start_date | date: 'yyyy-MM-dd'"
+          (ngModelChange)="updateStartDate($event)"
+        />
+      </div>
+      <div class="form-group half-width">
+        <label for="end-date">End Date</label>
+        <input
+          type="date"
+          id="end-date"
+          name="end-date"
+          class="form-control"
+          [ngModel]="selectedLeaveSegment.end_date | date: 'yyyy-MM-dd'"
+          (ngModelChange)="updateEndDate($event)"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <textarea
+        id="notes"
+        name="notes"
+        class="form-control"
+        rows="3"
+        [(ngModel)]="selectedLeaveSegment.notes"
+      ></textarea>
+    </div>
+
+    <div class="row">
+      <app-autocomplete-filter
+        class="form-group half-width autocomplete-box"
+        [label]="'Type'"
+        [options]="typesNamesAutocomplete"
+        [displayFn]="displayOption"
+        (optionSelected)="onTypeSelected($event)"
+        [selectedOption]="selectedTypeOption"
+        (inputChanged)="onTypeInputChanged($event)"
+      ></app-autocomplete-filter>
+      <app-autocomplete-filter
+        *ngIf="isAdminOrManager"
+        class="form-group half-width autocomplete-box"
+        [label]="'User'"
+        [options]="usersNamesAutocomplete"
+        [displayFn]="displayOption"
+        (optionSelected)="onUserSelected($event)"
+        [selectedOption]="selectedUserOption"
+        (inputChanged)="onUserInputChanged($event)"
+      ></app-autocomplete-filter>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #addSegmentTemplate>
+  <form [formGroup]="leaveSegmentForm" (ngSubmit)="addLeaveSegment()">
+    <div class="info-container">
+      <div class="row">
+        <div class="form-group half-width">
+          <label for="start-date">Start Date</label>
+          <input
+            type="date"
+            id="start-date"
+            formControlName="start_date"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group half-width">
+          <label for="end-date">End Date</label>
+          <input
+            type="date"
+            id="end-date"
+            formControlName="end_date"
+            class="form-control"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea
+          id="notes"
+          formControlName="notes"
+          class="form-control"
+          rows="3"
+        ></textarea>
+      </div>
+      <div class="row">
+        <app-autocomplete-filter
+          class="form-group half-width autocomplete-box"
+          [label]="'Type'"
+          [options]="typesNamesAutocomplete"
+          [displayFn]="displayOption"
+          (optionSelected)="onTypeSelected($event)"
+          (inputChanged)="onTypeInputChanged($event)"
+        ></app-autocomplete-filter>
+        <app-autocomplete-filter
+          *ngIf="isAdminOrManager"
+          class="form-group half-width autocomplete-box"
+          [label]="'User'"
+          [options]="usersNamesAutocomplete"
+          [displayFn]="displayOption"
+          (optionSelected)="onUserSelected($event)"
+          (inputChanged)="onUserInputChanged($event)"
+        ></app-autocomplete-filter>
+      </div>
+    </div>
+  </form>
+</ng-template>

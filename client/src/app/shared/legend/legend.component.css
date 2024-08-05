@@ -1,0 +1,29 @@
+::ng-deep.legend-container {
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.26),
+    0 1px 1px 0 rgba(0, 0, 0, 0.12),
+    0 2px 1px -1px rgba(0, 0, 0, 0.08);
+}
+.legend-color-box {
+  display: inline-block;
+  min-width: 20px;
+  min-height: 20px;
+  margin-right: 5px;
+  border-radius: 3px;
+}
+
+.legend {
+  cursor: pointer;
+}
+.legend :hover {
+  transform: scale(1.1);
+  transition: 0.7s ease all;
+  -moz-transition: 0.7s ease all;
+  -webkit-transition: 0.7s ease all;
+}
+.legend.selected {
+  width: max-content;
+  border: 1px solid rgb(43, 43, 43);
+  border-radius: 3px;
+  transform: scale(1.1);
+}
